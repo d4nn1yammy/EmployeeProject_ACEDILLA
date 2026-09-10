@@ -1,15 +1,22 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import version1.HourlyEmployee;
+import version1.PieceWorkerEmployee;
+import version1.CommissionEmployee;
+import version1.BasePlusCommissionEmployee;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        System.out.println("--- Hourly Employee Test ---\n");
+        HourlyEmployee h1= new HourlyEmployee(101, "Alice Smith", 45, 200);
+        PieceWorkerEmployee h2= new PieceWorkerEmployee(101, "Alice Smith", 30, 500);
+        CommissionEmployee h3= new CommissionEmployee(101, "Alice Smith", 500);
+        BasePlusCommissionEmployee h4= new BasePlusCommissionEmployee(101, "Alice Smith", 500, 200);
+
+        System.out.println(h1);
+        System.out.println(h2);
+        System.out.println(h3);
+        System.out.println(h4);
+
+
     }
 }
