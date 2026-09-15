@@ -6,22 +6,24 @@ public class HourlyEmployee {
     private MyDate birthDate;
     private float totalHoursWorked;
     private double ratePerHour;
+    public MyDate dateHired;
 
     public HourlyEmployee() {
-        this(0, new Name(), new MyDate(), 0, 0);
+        this(0, new Name(), new MyDate(), 0, 0, new MyDate());
     }
 
-    public HourlyEmployee(int empID, Name name, MyDate birthDate) {
-        this(empID, name, birthDate, 0, 0);
+    public HourlyEmployee(int empID, Name name, MyDate birthDate, MyDate dateHired) {
+        this(empID, name, birthDate, 0, 0, dateHired);
     }
 
     public HourlyEmployee(int empID, Name name, MyDate birthDate,
-                          float totalHoursWorked, double ratePerHour) {
+                          float totalHoursWorked, double ratePerHour, MyDate dateHired) {
         this.empID = empID;
         this.name = name == null ? new Name() : name;
         this.birthDate = birthDate == null ? new MyDate() : birthDate;
         this.totalHoursWorked = totalHoursWorked;
         this.ratePerHour = ratePerHour;
+        this.dateHired = dateHired;
     }
 
     public int getEmpID() {
@@ -64,6 +66,15 @@ public class HourlyEmployee {
         this.ratePerHour = ratePerHour;
     }
 
+    public MyDate getDateHired() {
+        return dateHired;
+    }
+
+    public void setDateHired(MyDate dateHired) {
+        this.dateHired = dateHired == null ? new MyDate() : dateHired;
+    }
+
+
     public double computeSalary() {
         if (totalHoursWorked <= 40) {
             return totalHoursWorked * ratePerHour;
@@ -83,6 +94,7 @@ public class HourlyEmployee {
                 ", \nBirth Date: " + birthDate +
                 ", \nTotal Hours Worked: " + totalHoursWorked +
                 ", \nRate Per Hour: " + ratePerHour +
+                ", \nDate Hired: " + dateHired +
                 ", \nSalary: " + computeSalary() +
                 "\n}";
     }

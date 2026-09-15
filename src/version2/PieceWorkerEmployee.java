@@ -6,22 +6,24 @@ public class PieceWorkerEmployee {
     private MyDate birthDate;
     private int totalPiecesFinished;
     private double ratePerPiece;
+    private MyDate dateHired;
 
     public PieceWorkerEmployee() {
-        this(0, new Name(), new MyDate(), 0, 0);
+        this(0, new Name(), new MyDate(), 0, 0, new MyDate());
     }
 
-    public PieceWorkerEmployee(int empID, Name name, MyDate birthDate) {
-        this(empID, name, birthDate, 0, 0);
+    public PieceWorkerEmployee(int empID, Name name, MyDate birthDate, MyDate dateHired) {
+        this(empID, name, birthDate, 0, 0, dateHired);
     }
 
     public PieceWorkerEmployee(int empID, Name name, MyDate birthDate,
-                               int totalPiecesFinished, double ratePerPiece) {
+                               int totalPiecesFinished, double ratePerPiece, MyDate dateHired) {
         this.empID = empID;
         this.name = name == null ? new Name() : name;
         this.birthDate = birthDate == null ? new MyDate() : birthDate;
         this.totalPiecesFinished = totalPiecesFinished;
         this.ratePerPiece = ratePerPiece;
+        this.dateHired = dateHired;
     }
 
     public int getEmpID() {
@@ -64,6 +66,14 @@ public class PieceWorkerEmployee {
         this.ratePerPiece = ratePerPiece;
     }
 
+    public MyDate getDateHired(){
+        return dateHired;
+    }
+
+    public void setDateHired(MyDate dateHired) {
+        this.dateHired = dateHired == null ? new MyDate() : dateHired;
+    }
+
     public double computeSalary() {
         double basePay = totalPiecesFinished * ratePerPiece;
         int bonusGroups = totalPiecesFinished / 100;
@@ -82,6 +92,7 @@ public class PieceWorkerEmployee {
                 ", \nBirth Date: " + birthDate +
                 ", \nTotal Pieces Finished: " + totalPiecesFinished +
                 ", \nRate Per Piece: " + ratePerPiece +
+                ", \nDate Hired: " + dateHired +
                 ", \nSalary: " + computeSalary() +
                 "\n}";
     }

@@ -58,7 +58,7 @@ public class Name {
     }
 
     public void displayName() {
-        System.out.println(this);
+        System.out.println(this.toString());
     }
 
     @Override

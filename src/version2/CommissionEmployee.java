@@ -8,20 +8,22 @@ public class CommissionEmployee {
     private Name name;
     private MyDate birthDate;
     private double totalSale;
+    private MyDate dateHired;
 
     public CommissionEmployee() {
-        this(0, new Name(), new MyDate(), 0);
+        this(0, new Name(), new MyDate(), 0, new MyDate());
     }
 
-    public CommissionEmployee(int empID, Name name, MyDate birthDate) {
-        this(empID, name, birthDate, 0);
+    public CommissionEmployee(int empID, Name name, MyDate birthDate, MyDate dateHired) {
+        this(empID, name, birthDate, 0, dateHired);
     }
 
-    public CommissionEmployee(int empID, Name name, MyDate birthDate, double totalSale) {
+    public CommissionEmployee(int empID, Name name, MyDate birthDate, double totalSale, MyDate dateHired) {
         this.empID = empID;
         this.name = name == null ? new Name() : name;
         this.birthDate = birthDate == null ? new MyDate() : birthDate;
         this.totalSale = totalSale;
+        this.dateHired = dateHired;
     }
 
     public int getEmpID() {
@@ -56,6 +58,14 @@ public class CommissionEmployee {
         this.totalSale = totalSale;
     }
 
+    public MyDate getDateHired(){
+        return dateHired;
+    }
+
+    public void setDateHired(MyDate dateHired) {
+        this.dateHired = dateHired == null ? new MyDate() : dateHired;
+    }
+
     public double computeSalary() {
         double commission;
         if (totalSale <= 50000) {
@@ -86,6 +96,7 @@ public class CommissionEmployee {
                 ", \nEmployee Name: " + name +
                 ", \nBirth Date: " + birthDate +
                 ", \nTotal Sale: " + totalSale +
+                ", \nDate Hired: " + dateHired +
                 ", \nSalary: " + computeSalary() +
                 "\n}";
     }

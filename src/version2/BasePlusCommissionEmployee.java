@@ -9,22 +9,24 @@ public class BasePlusCommissionEmployee {
     private MyDate birthDate;
     private double totalSale;
     private double baseSalary;
+    private MyDate dateHired;
 
     public BasePlusCommissionEmployee() {
-        this(0, new Name(), new MyDate(), 0, 0);
+        this(0, new Name(), new MyDate(), 0, 0, new MyDate());
     }
 
-    public BasePlusCommissionEmployee(int empID, Name name, MyDate birthDate) {
-        this(empID, name, birthDate, 0, 0);
+    public BasePlusCommissionEmployee(int empID, Name name, MyDate birthDate, MyDate dateHired) {
+        this(empID, name, birthDate, 0, 0, dateHired);
     }
 
     public BasePlusCommissionEmployee(int empID, Name name, MyDate birthDate,
-                                      double totalSale, double baseSalary) {
+                                      double totalSale, double baseSalary, MyDate dateHired) {
         this.empID = empID;
         this.name = name == null ? new Name() : name;
         this.birthDate = birthDate == null ? new MyDate() : birthDate;
         this.totalSale = totalSale;
         this.baseSalary = baseSalary;
+        this.dateHired = dateHired;
     }
 
     public int getEmpID() {
@@ -63,6 +65,15 @@ public class BasePlusCommissionEmployee {
         return baseSalary;
     }
 
+    public MyDate getDateHired(){
+        return dateHired;
+    }
+
+    public void setDateHired(MyDate dateHired) {
+        this.dateHired = dateHired == null ? new MyDate() : dateHired;
+    }
+
+
     public void setBaseSalary(double baseSalary) {
         this.baseSalary = baseSalary;
     }
@@ -99,6 +110,7 @@ public class BasePlusCommissionEmployee {
                 ", \nBirth Date: " + birthDate +
                 ", \nTotal Sale: " + totalSale +
                 ", \nBase Salary: " + baseSalary +
+                ", \nDate Hired: " + dateHired +
                 ", \nCommission: " + computeCommission() +
                 ", \nSalary: " + computeSalary() +
                 "\n}";
