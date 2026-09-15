@@ -2,20 +2,27 @@ package version2;
 
 public class Name {
     private String firstName;
-    private String middleName;
+    private String midName;
     private String lastName;
     private String suffix;
 
-    public Name(){
-
+    public Name() {
+        this("", "", "", "");
     }
 
-    public Name(){
-
+    public Name(String lastName, String firstName) {
+        this(firstName, "", lastName, "");
     }
 
-    public Name(){
+    public Name(String firstName, String midName, String lastName) {
+        this(firstName, midName, lastName, "");
+    }
 
+    public Name(String firstName, String midName, String lastName, String suffix) {
+        this.firstName = firstName == null ? "" : firstName;
+        this.midName = midName == null ? "" : midName;
+        this.lastName = lastName == null ? "" : lastName;
+        this.suffix = suffix == null ? "" : suffix;
     }
 
     public String getFirstName() {
@@ -23,15 +30,15 @@ public class Name {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName == null ? "" : firstName;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getMidName() {
+        return midName;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setMidName(String midName) {
+        this.midName = midName == null ? "" : midName;
     }
 
     public String getLastName() {
@@ -39,7 +46,7 @@ public class Name {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName == null ? "" : lastName;
     }
 
     public String getSuffix() {
@@ -47,6 +54,17 @@ public class Name {
     }
 
     public void setSuffix(String suffix) {
-        this.suffix = suffix;
+        this.suffix = suffix == null ? "" : suffix;
+    }
+
+    public void displayName() {
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        String middle = midName.isEmpty() ? "" : " " + midName;
+        String ending = suffix.isEmpty() ? "" : " " + suffix;
+        return firstName + middle + (lastName.isEmpty() ? "" : " " + lastName) + ending;
     }
 }
