@@ -1,61 +1,35 @@
-package version1;
+import version2.BasePlusCommissionEmployee;
+import version2.CommissionEmployee;
+import version2.HourlyEmployee;
+import version2.MyDate;
+import version2.Name;
+import version2.PieceWorkerEmployee;
 
-public class PieceWorkerEmployee {
-    private int empID;
-    private String empName;
-    private int totalPiecesFinished;
-    private double ratePerPiece;
+public class Main2 {
 
-    public PieceWorkerEmployee() {
-        this(0,"N/A");
-    }
+    public static void main(String[] args) {
+        int bdayMonth = 3;
 
-    public PieceWorkerEmployee(int empID, String empName) {
-        this(empID, empName, 0, 0);
-    }
+        Name n1 = new Name("Diluc", "Ragnvindr");
+        MyDate d1 = new MyDate(bdayMonth, 2004, 4, 30);
+        HourlyEmployee he1 = new HourlyEmployee(1, n1, d1, 40, 5);
 
-    public PieceWorkerEmployee(int empID, String empName, int totalPiecesFinished, double ratePerPiece){
-        this.empID = empID;
-        this.empName = empName;
-        this.totalPiecesFinished = totalPiecesFinished;
-        this.ratePerPiece = ratePerPiece;
-    }
+        Name n2 = new Name("Clark", "Dale", "Ablay");
+        MyDate d2 = new MyDate(bdayMonth, 2006, 9, 10);
+        PieceWorkerEmployee he2 = new PieceWorkerEmployee(2, n2, d2, 45, 5);
 
-    public int getEmpID() {
-        return empID;
-    }
+        Name n3 = new Name("Junnel", "Paolo", "Aguipo", "Uy");
+        MyDate d3 = new MyDate(bdayMonth, 2006, 3, 5);
+        CommissionEmployee he3 = new CommissionEmployee(3, n3, d3, 45);
 
-    public void setEmpID(int empID) {
-        this.empID = empID;
-    }
+        Name n4 = new Name("Lloyd", "Thomas", "Plaza", "Griffiths");
+        MyDate d4 = new MyDate(bdayMonth, 2007, 9, 17);
+        BasePlusCommissionEmployee he4 =
+                new BasePlusCommissionEmployee(4, n4, d4, 1100, 200);
 
-    public String getEmpName() {
-        return empName;
-    }
-
-    public void setEmpName(String empName) {
-        this.empName = empName;
-    }
-
-    public int getTotalPiecesFinished() {
-        return totalPiecesFinished;
-    }
-
-    public void setTotalPiecesFinished(int totalPiecesFinished) {
-        this.totalPiecesFinished = totalPiecesFinished;
-    }
-
-    public double getRatePerPiece() {
-        return ratePerPiece;
-    }
-
-    public void setRatePerPiece(double ratePerPiece) {
-        this.ratePerPiece = ratePerPiece;
-    }
-
-    public double computeSalary(){
-        double BasePay = totalPiecesFinished * ratePerPiece;
-
-
+        System.out.println(he1);
+        System.out.println(he2);
+        System.out.println(he3);
+        System.out.println(he4);
     }
 }

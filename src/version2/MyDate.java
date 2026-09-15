@@ -6,7 +6,7 @@ public class MyDate {
     private int month;
     private int year;
 
-    public myDate(){
+    public void myDate(){
         this(0,0,0,0);
     }
     public MyDate(int date, int day, int month, int year) {

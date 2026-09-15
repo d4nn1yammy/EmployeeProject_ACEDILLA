@@ -1,22 +1,26 @@
 package version2;
 
 public class CommissionEmployee {
+
+    private static int bdayMonth = 3;
+
     private int empID;
-    private String empName;
+    private Name name;
+    private MyDate birthDate;
     private double totalSale;
 
-
     public CommissionEmployee() {
-        this(0, "N/A");
+        this(0, new Name(), new MyDate(), 0);
     }
 
-    public CommissionEmployee(int empID, String empName) {
-        this(empID, empName, 0);
+    public CommissionEmployee(int empID, Name name, MyDate birthDate) {
+        this(empID, name, birthDate, 0);
     }
 
-    public CommissionEmployee(int empID, String empName, double totalSale) {
-        this.empName = empName;
+    public CommissionEmployee(int empID, Name name, MyDate birthDate, double totalSale) {
         this.empID = empID;
+        this.name = name == null ? new Name() : name;
+        this.birthDate = birthDate == null ? new MyDate() : birthDate;
         this.totalSale = totalSale;
     }
 
@@ -28,12 +32,20 @@ public class CommissionEmployee {
         this.empID = empID;
     }
 
-    public String getEmpName() {
-        return empName;
+    public Name getName() {
+        return name;
     }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
+    public void setName(Name name) {
+        this.name = name == null ? new Name() : name;
+    }
+
+    public MyDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(MyDate birthDate) {
+        this.birthDate = birthDate == null ? new MyDate() : birthDate;
     }
 
     public double getTotalSale() {
@@ -44,35 +56,37 @@ public class CommissionEmployee {
         this.totalSale = totalSale;
     }
 
-    public double computeSalary(){
-        double Salary;
-
-        if (totalSale < 50000) {
-            Salary = 0.05 * totalSale;
+    public double computeSalary() {
+        double commission;
+        if (totalSale <= 50000) {
+            commission = totalSale * 0.05;
+        } else if (totalSale <= 100000) {
+            commission = totalSale * 0.10;
+        } else if (totalSale <= 500000) {
+            commission = totalSale * 0.15;
+        } else {
+            commission = totalSale * 0.20;
         }
-        else if (totalSale >= 100000 || totalSale < 500000){
-            Salary = 0.15 * totalSale;
-        }
-        else{
-            Salary = 0.20 * totalSale;
-        }
-        return Salary;
+        return commission + getBirthMonthBonus();
     }
 
-    public void displayHourlyEmployee(){
-        System.out.println("Employee ID: " + this.empID);
-        System.out.println("Employee Name: " + this.empName);
-        System.out.println("Total Sales: " + this.totalSale);
+    private double getBirthMonthBonus() {
+        double bdayBonus = 5000;
+        return birthDate.isMonth(bdayMonth) ? bdayBonus : 0;
+    }
+
+    public void displayCommissionEmployee() {
+        System.out.println(this);
     }
 
     @Override
     public String toString() {
-        return "CommissionEmployee{" +
-                "empID=" + empID +
-                ", empName='" + empName + '\'' +
-                ", totalSale=" + totalSale +
-                "Salary = " + computeSalary() +
-                '}';
+        return "CommissionEmployee{\n" +
+                "Employee ID: " + empID +
+                ", \nEmployee Name: " + name +
+                ", \nBirth Date: " + birthDate +
+                ", \nTotal Sale: " + totalSale +
+                ", \nSalary: " + computeSalary() +
+                "\n}";
     }
 }
-
