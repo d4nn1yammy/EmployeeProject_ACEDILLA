@@ -2,28 +2,28 @@ package version2;
 
 public class PieceWorkerEmployee {
     private int empID;
-    private Name name;
+    private Name empName;
     private MyDate birthDate;
+    private MyDate dateHired;
     private int totalPiecesFinished;
     private double ratePerPiece;
-    private MyDate dateHired;
 
     public PieceWorkerEmployee() {
-        this(0, new Name(), new MyDate(), 0, 0, new MyDate());
+        this(0, new Name(), new MyDate(), new MyDate(), 0, 0);
     }
 
-    public PieceWorkerEmployee(int empID, Name name, MyDate birthDate, MyDate dateHired) {
-        this(empID, name, birthDate, 0, 0, dateHired);
+    public PieceWorkerEmployee(int empID, Name empName, MyDate birthDate, MyDate dateHired) {
+        this(empID, empName, birthDate, dateHired, 0, 0);
     }
 
-    public PieceWorkerEmployee(int empID, Name name, MyDate birthDate,
-                               int totalPiecesFinished, double ratePerPiece, MyDate dateHired) {
+    public PieceWorkerEmployee(int empID, Name empName, MyDate birthDate, MyDate dateHired,
+                               int totalPiecesFinished, double ratePerPiece) {
         this.empID = empID;
-        this.name = name == null ? new Name() : name;
+        this.empName = empName == null ? new Name() : empName;
         this.birthDate = birthDate == null ? new MyDate() : birthDate;
+        this.dateHired = dateHired == null ? new MyDate() : dateHired;
         this.totalPiecesFinished = totalPiecesFinished;
         this.ratePerPiece = ratePerPiece;
-        this.dateHired = dateHired;
     }
 
     public int getEmpID() {
@@ -35,11 +35,11 @@ public class PieceWorkerEmployee {
     }
 
     public Name getName() {
-        return name;
+        return empName;
     }
 
-    public void setName(Name name) {
-        this.name = name == null ? new Name() : name;
+    public void setEmpName(Name empName) {
+        this.empName = empName == null ? new Name() : empName;
     }
 
     public MyDate getBirthDate() {
@@ -54,6 +54,14 @@ public class PieceWorkerEmployee {
         return totalPiecesFinished;
     }
 
+    public MyDate getDateHired() {
+        return dateHired;
+    }
+
+    public void setDateHired(MyDate dateHired) {
+        this.dateHired = dateHired == null ? new MyDate() : dateHired;
+    }
+
     public void setTotalPiecesFinished(int totalPiecesFinished) {
         this.totalPiecesFinished = totalPiecesFinished;
     }
@@ -66,34 +74,31 @@ public class PieceWorkerEmployee {
         this.ratePerPiece = ratePerPiece;
     }
 
-    public MyDate getDateHired(){
-        return dateHired;
-    }
-
-    public void setDateHired(MyDate dateHired) {
-        this.dateHired = dateHired == null ? new MyDate() : dateHired;
-    }
-
+    // Compute salary without birthday bonus
     public double computeSalary() {
+        return computeSalary(-1); // Pass -1 so it won't match any month
+    }
+
+    public double computeSalary(int currentMonth) {
         double basePay = totalPiecesFinished * ratePerPiece;
         int bonusGroups = totalPiecesFinished / 100;
-        return basePay + (bonusGroups * 10 * ratePerPiece);
+        double salary = basePay + (bonusGroups * 10 * ratePerPiece);
+
+        if (birthDate.isMonth(currentMonth)) {
+            salary += 5000;
+        }
+
+        return salary;
     }
 
     public void displayPieceWorkerEmployee() {
-        System.out.println(this);
+        System.out.printf("ID: %d | Name: %s | DOB: %s | Hired: %s | Pieces: %d | Rate: ₱%.2f/piece%n",
+                empID, empName, birthDate, dateHired, totalPiecesFinished, ratePerPiece);
     }
-
     @Override
     public String toString() {
-        return "PieceWorkerEmployee{\n" +
-                "Employee ID: " + empID +
-                ", \nEmployee Name: " + name +
-                ", \nBirth Date: " + birthDate +
-                ", \nTotal Pieces Finished: " + totalPiecesFinished +
-                ", \nRate Per Piece: " + ratePerPiece +
-                ", \nDate Hired: " + dateHired +
-                ", \nSalary: " + computeSalary() +
-                "\n}";
+        return String.format("PieceWorkerEmployee [ID: %d, Name: %s, DOB: %s, Hired: %s, " +
+                        "Pieces: %d, Rate: ₱%.2f, Total Salary: ₱%.2f]",
+                empID, empName, birthDate, dateHired, totalPiecesFinished, ratePerPiece, computeSalary());
     }
 }

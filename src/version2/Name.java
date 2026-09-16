@@ -10,7 +10,7 @@ public class Name {
         this("", "", "", "");
     }
 
-    public Name(String lastName, String firstName) {
+    public Name(String firstName, String lastName){
         this(firstName, "", lastName, "");
     }
 
@@ -63,8 +63,17 @@ public class Name {
 
     @Override
     public String toString() {
-        String middle = midName.isEmpty() ? "" : " " + midName;
-        String ending = suffix.isEmpty() ? "" : " " + suffix;
-        return firstName + middle + (lastName.isEmpty() ? "" : " " + lastName) + ending;
+        StringBuilder sb = new StringBuilder();
+        sb.append(lastName);
+        if (!firstName.isEmpty()) {
+            sb.append(", ").append(firstName);
+        }
+        if (!midName.isEmpty()) {
+            sb.append(" ").append(midName.charAt(0)).append(".");
+        }
+        if (!suffix.isEmpty()) {
+            sb.append(" ").append(suffix);
+        }
+        return sb.toString();
     }
 }
