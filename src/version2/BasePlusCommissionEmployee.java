@@ -87,7 +87,7 @@ public class BasePlusCommissionEmployee {
     }
 
     public double computeSalary() {
-        return computeSalary(-1); // Pass -1 so it won't match any month
+        return computeSalary(-1);
     }
 
     public double computeSalary(int currentMonth) {
